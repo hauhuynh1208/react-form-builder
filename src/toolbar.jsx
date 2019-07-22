@@ -55,6 +55,7 @@ export default class Toolbar extends React.Component {
         key: 'Header',
         name: 'Header Text',
         icon: 'fa fa-header',
+        field_name: 'header_',
         static: true,
         content: 'Placeholder Text...',
       },
@@ -63,6 +64,7 @@ export default class Toolbar extends React.Component {
         name: 'Label',
         static: true,
         icon: 'fa fa-font',
+        field_name: 'label_',
         content: 'Placeholder Text...',
       },
       {
@@ -70,6 +72,7 @@ export default class Toolbar extends React.Component {
         name: 'Paragraph',
         static: true,
         icon: 'fa fa-paragraph',
+        field_name: 'paragraph_',
         content: 'Placeholder Text...',
       },
       {
@@ -77,6 +80,7 @@ export default class Toolbar extends React.Component {
         name: 'Line Break',
         static: true,
         icon: 'fa fa-arrows-h',
+        field_name: 'line_break_',
       },
       {
         key: 'Dropdown',
