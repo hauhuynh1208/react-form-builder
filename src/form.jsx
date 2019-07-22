@@ -62,6 +62,7 @@ export default class ReactForm extends React.Component {
   _getItemValue(item, ref) {
     let $item = {
       element: item.element,
+      label: '',
       value: '',
     };
     if (item.element === 'Rating') {
@@ -137,20 +138,50 @@ export default class ReactForm extends React.Component {
   }
 
   _collect(item) {
-    const itemData = { name: item.field_name };
+    const itemData = { type: item.element, name: item.field_name, label: item.label };
     const ref = this.inputs[item.field_name];
     if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
-      const checked_options = [];
+
+      // This code just produce the value output with the checked
+      // option, so I made the modifications which will produce
+      // the option like this
+      // [{key, text, value, isChecked}]
+
+      // const checked_options = [];
+      // item.options.forEach(option => {
+      //   const $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
+      //   if ($option.checked) {
+      //     checked_options.push(option.key);
+      //   }
+      // });
+      // itemData.value = checked_options;
+      itemData.value=[]
       item.options.forEach(option => {
+        const _option=option
+        let isChecked = false
         const $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
         if ($option.checked) {
-          checked_options.push(option.key);
+          isChecked = true
         }
+        itemData.value.push({..._option, isChecked})
       });
-      itemData.value = checked_options;
+    } else if (item.element === 'Dropdown') {
+      itemData.value=[]
+      item.options.forEach(option => {
+        const _option=option
+        let isSelected = false
+        var $option = ReactDOM.findDOMNode(ref).querySelector(`#${option.key}`)
+        if ($option.selected) {
+          isSelected = true
+        }
+        itemData.value.push({..._option, isSelected})
+      });
+    }
+    else if (!ref) {
+        itemData.value=item.content
     } else {
-      if (!ref) return null;
-      itemData.value = this._getItemValue(item, ref).value;
+
+      itemData.value = this._getItemValue(item, ref).value
     }
     return itemData;
   }
@@ -199,7 +230,12 @@ export default class ReactForm extends React.Component {
         onSubmit(data);
       } else {
         const $form = ReactDOM.findDOMNode(this.form);
-        $form.submit();
+        // var object = {};
+        // const formData = new FormData(e.target)
+        // formData.forEach((value, key) => {object[key] = value});
+        // var json = JSON.stringify(object);
+        // console.log(json)
+        // $form.submit();
       }
     }
   }
@@ -258,6 +294,8 @@ export default class ReactForm extends React.Component {
         this.answerData[item.field_name] = this.props.variables[item.variableKey];
       }
     });
+
+
 
     const items = data_items.map(item => {
       switch (item.element) {

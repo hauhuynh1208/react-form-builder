@@ -132,6 +132,7 @@ export default class Preview extends React.Component {
     if (this.props.editMode) { classes += ' is-editing'; }
     const data = this.state.data.filter(x => !!x);
     const items = data.map((item, index) => this.getElement(item, index));
+
     return (
       <div className={classes}>
         <div className="edit-form" ref={this.editForm}>

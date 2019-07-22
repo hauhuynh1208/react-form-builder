@@ -63,7 +63,6 @@ class Header extends React.Component {
 
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
-
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
@@ -145,7 +144,6 @@ class TextInput extends React.Component {
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
-
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
@@ -387,7 +385,6 @@ class Dropdown extends React.Component {
 
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
-
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
@@ -396,7 +393,7 @@ class Dropdown extends React.Component {
           <select {...props}>
             {this.props.data.options.map((option) => {
               const this_key = `preview_${option.key}`;
-              return <option value={option.value} key={this_key}>{option.text}</option>;
+              return <option value={option.value} id={option.key} key={this_key}>{option.text}</option>;
             })}
           </select>
         </div>

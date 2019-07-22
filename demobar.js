@@ -1,6 +1,6 @@
-import React from 'react';
-import store from './src/stores/store';
-import ReactFormGenerator from './src/form';
+import React from "react";
+import store from "./src/stores/store";
+import ReactFormGenerator from "./src/form";
 
 const answers = {};
 // const answers = {
@@ -65,34 +65,51 @@ export default class Demobar extends React.Component {
 
   // eslint-disable-next-line no-unused-vars
   _onSubmit(data) {
-    // console.log('onSubmit', data);
+    // console.log("onSubmit", this.state.data);
     // Place code to post json data to server here
   }
 
   render() {
-    let modalClass = 'modal';
+    let modalClass = "modal";
     if (this.state.previewVisible) {
-      modalClass += ' show';
+      modalClass += " show";
     }
 
-    let shortModalClass = 'modal short-modal';
+    let shortModalClass = "modal short-modal";
     if (this.state.shortPreviewVisible) {
-      shortModalClass += ' show';
+      shortModalClass += " show";
     }
 
-    let roModalClass = 'modal ro-modal';
+    let roModalClass = "modal ro-modal";
     if (this.state.roPreviewVisible) {
-      roModalClass += ' show';
+      roModalClass += " show";
     }
-
     return (
-      <div className="clearfix" style={{ margin: '10px', width: '70%' }}>
+      <div className="clearfix" style={{ margin: "10px", width: "70%" }}>
         <h4 className="pull-left">Preview</h4>
-        <button className="btn btn-primary pull-right" style={{ marginRight: '10px' }} onClick={this.showPreview.bind(this)}>Preview Form</button>
-        <button className="btn btn-default pull-right" style={{ marginRight: '10px' }} onClick={this.showShortPreview.bind(this)}>Alternate/Short Form</button>
-        <button className="btn btn-default pull-right" style={{ marginRight: '10px' }} onClick={this.showRoPreview.bind(this)}>Read Only Form</button>
+        <button
+          className="btn btn-primary pull-right"
+          style={{ marginRight: "10px" }}
+          onClick={this.showPreview.bind(this)}
+        >
+          Preview Form
+        </button>
+        <button
+          className="btn btn-default pull-right"
+          style={{ marginRight: "10px" }}
+          onClick={this.showShortPreview.bind(this)}
+        >
+          Alternate/Short Form
+        </button>
+        <button
+          className="btn btn-default pull-right"
+          style={{ marginRight: "10px" }}
+          onClick={this.showRoPreview.bind(this)}
+        >
+          Read Only Form
+        </button>
 
-        { this.state.previewVisible &&
+        {this.state.previewVisible && (
           <div className={modalClass}>
             <div className="modal-dialog">
               <div className="modal-content">
@@ -102,22 +119,30 @@ export default class Demobar extends React.Component {
                   back_name="Back"
                   answer_data={answers}
                   action_name="Save"
-                  form_action="/api/form"
+                  form_action="/server/api/form"
                   form_method="POST"
                   // skip_validations={true}
-                  // onSubmit={this._onSubmit}
+                  onSubmit={this._onSubmit}
                   variables={this.props.variables}
-                  data={this.state.data} />
+                  data={this.state.data}
+                />
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button
+                    type="button"
+                    className="btn btn-default"
+                    data-dismiss="modal"
+                    onClick={this.closePreview.bind(this)}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        }
+        )}
 
-        { this.state.roPreviewVisible &&
+        {this.state.roPreviewVisible && (
           <div className={roModalClass}>
             <div className="modal-dialog">
               <div className="modal-content">
@@ -132,17 +157,25 @@ export default class Demobar extends React.Component {
                   read_only={true}
                   variables={this.props.variables}
                   hide_actions={true}
-                  data={this.state.data} />
+                  data={this.state.data}
+                />
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button
+                    type="button"
+                    className="btn btn-default"
+                    data-dismiss="modal"
+                    onClick={this.closePreview.bind(this)}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        }
+        )}
 
-        { this.state.shortPreviewVisible &&
+        {this.state.shortPreviewVisible && (
           <div className={shortModalClass}>
             <div className="modal-dialog">
               <div className="modal-content">
@@ -155,15 +188,23 @@ export default class Demobar extends React.Component {
                   data={this.state.data}
                   display_short={true}
                   variables={this.props.variables}
-                  hide_actions={false} />
+                  hide_actions={false}
+                />
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button
+                    type="button"
+                    className="btn btn-default"
+                    data-dismiss="modal"
+                    onClick={this.closePreview.bind(this)}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        }
+        )}
       </div>
     );
   }
